@@ -1,18 +1,17 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEditor;
 
-public class PathControllerEditor : MonoBehaviour
-{
-    // Start is called before the first frame update
-    void Start()
+[CustomEditor(typeof(PathController))]
+public class PathControllerEditor : Editor
+{ 
+    public override void OnInspectorGUI()
     {
-        
-    }
+        base.OnInspectorGUI();
 
-    // Update is called once per frame
-    void Update()
-    {
-        
+        PathController pathController = (PathController)target;
+
+        EditorGUILayout.LabelField("Number of waypoints", pathController.path.Length.ToString());
     }
 }
