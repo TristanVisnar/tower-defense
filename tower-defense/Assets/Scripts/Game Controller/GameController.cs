@@ -10,7 +10,10 @@ public class GameController : MonoBehaviour
 
     public float health = 5f;
 
+    public bool playing = false;
+
     private float timerTime = 0;
+    public float playSpeedMultiplier = 1;
 
     void Start()
     {
@@ -21,7 +24,11 @@ public class GameController : MonoBehaviour
 
     void Update()
     {
-        timerTime += Time.deltaTime;
+        if (!playing) {
+            return;        
+        }
+
+        timerTime += Time.deltaTime * playSpeedMultiplier;
         if(spawnTimes.Count == 0)
         {
             return;
@@ -33,6 +40,18 @@ public class GameController : MonoBehaviour
             Instantiate(enemyPrefab);
         }
 
+    }
+
+    public void Pause() 
+    {
+        playing = false;
+    }
+
+    public void Play(float speed) 
+    {
+        playing = true;
+        playSpeedMultiplier = speed;
+        
     }
 
     public void TakeDamage()

@@ -11,9 +11,19 @@ public class Shoot : MonoBehaviour
     private float cooldownCounter = 0f;
     private bool onCooldown = false;
 
-
+    private GameObject controllerObject;
+    private GameController controller;
+    public void Start()
+    {
+        controllerObject =  GameObject.FindGameObjectWithTag("GameController");
+        controller = controllerObject.GetComponent<GameController>();
+    }
     public void Update()
     {
+        if (!controller.playing) 
+        {
+            return;
+        }
         if (!onCooldown)
         {
             GameObject enemy = FindClosestEnemy();
